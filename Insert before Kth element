@@ -1,0 +1,22 @@
+Node* insertBeforeKthNode(Node* head, int k, int element)
+{
+    if(k==1) 
+    {
+        head = insertBeforeTail(head,element);
+        return head;
+    }
+    
+    Node* temp = head;
+    int count=0;
+    while(temp!=NULL)
+    {
+        count++;
+        if(count == k) break;
+        temp=temp->next;
+    }
+    Node* previous = temp->back;
+    Node* newNode = new Node(element,temp,previous);
+    previous->next = newNode;
+    temp->back = newNode;
+    return head;
+}
