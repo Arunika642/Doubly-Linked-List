@@ -1,0 +1,71 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+class Node{
+    public:
+    int data;
+    Node* next;
+    Node* back;
+    
+    Node(int data1)
+    {
+        data = data1;
+        next = nullptr;
+        back = nullptr;
+    }
+    Node(int data1, Node* next1, Node* back1)
+    {
+        data = data1;
+        next = next1;
+        back = back1;
+    }
+};
+
+void print(Node* head)
+{
+    if(head == NULL)
+    {
+        cout << "The list is empty";
+        return;
+    }
+    Node* temp = head;
+    while(temp!=NULL)
+    {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+}
+
+Node* convertarr2DLL(vector<int> arr)
+{
+    if(arr.empty()) return NULL;
+    
+    Node* head = new Node(arr[0]);
+    Node* previous = head;
+    for(int i=1; i<arr.size();i++)
+    {
+        Node* temp = new Node(arr[i],nullptr,previous);
+        previous->next = temp;
+        previous = temp;
+    }
+    return head;
+}
+
+Node* insertAtHead(Node* head, int element)
+{
+    if(head == NULL) return NULL;
+    Node* temp = new Node(element);
+    head->back = temp;
+    temp->next = head;
+    head = temp; 
+    return head;
+}
+int main() {
+	// your code goes here
+	vector<int> arr = {1,2,3,4,5,7};
+	Node* head = convertarr2DLL(arr);
+	head = insertAtHead(head,16);
+	print(head);
+
+}
