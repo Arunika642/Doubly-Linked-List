@@ -1,0 +1,39 @@
+Node* deleteK(Node* head,int K)
+{
+    int count = 0;
+    Node* temp = head;
+    for(int i=1;i<K;i++)
+    {
+        count++;
+        if(count==K) break;
+        else
+        {
+            temp=temp->next;
+        }
+    }
+    
+    Node* previous = temp->back;
+    Node* front = temp->next;
+    
+    if(previous == NULL)
+    {
+        head = deleteHead(head);
+    }
+    else if(front==NULL)
+    {
+        head = deleteTail(head);
+    }
+    else if(previous == NULL && front == NULL)
+    {
+        delete temp;
+        return NULL;
+    }
+    else
+    {
+        previous->next = front;
+        front->back = previous;
+        temp->back = nullptr;
+        temp->next= nullptr;
+    }
+    return head;
+}
