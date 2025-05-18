@@ -1,0 +1,27 @@
+
+Node* deleteKey(Node* head, int key)
+{
+    Node* temp = head;
+    while(temp!=NULL)
+    {
+        if(temp->data == key)
+        {
+            if(temp == head)
+            {
+                head = temp->next;
+            }
+            Node* front = temp->next;
+            Node* previous = temp->back;
+            if(front!=NULL) front->back = previous;
+            if(previous!=NULL) previous->next = front;
+            
+            delete temp;
+            temp = front;
+        }
+        else
+        {
+            temp = temp->next;
+        }
+    }
+        return head; 
+}
